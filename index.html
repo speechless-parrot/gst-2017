@@ -1,265 +1,666 @@
 <!DOCTYPE html>
 <html itemscope="itemscope" itemtype="http://schema.org/WebPage" lang="en">
 <head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
-    <!-- SCRIPT TO SIMULATE THE YEAR 2017 -->
-    <script>
-        // Save the original Date object
-        const OriginalDate = Date;
+<!-- SCRIPT TO SIMULATE THE YEAR 2017 -->
+<script>
+const OriginalDate = Date;
 
-        // Create a new Date class that behaves like the original, but modifies the year
-        class MockDate extends OriginalDate {
-            constructor(...args) {
-                // If a date is created with parameters (e.g., new Date('2025-01-01')),
-                // use the original constructor without modification.
-                if (args.length > 0) {
-                    super(...args);
-                } else {
-                    // If the current date is requested (e.g., new Date()),
-                    // get the real date and time...
-                    const now = new OriginalDate();
-                    // ...but set the year to 2017.
-                    now.setFullYear(2017);
-                    // Create the date with the modified year.
-                    super(now);
-                }
-            }
+class MockDate extends OriginalDate {
+  constructor(... args) {
+    if (args.length > 0) {
+      super(... args);
+    } else {
+      const now = new OriginalDate();
+      now.setFullYear(2017);
+      super(now);
+    }
+  }
 
-            // Also override the static Date.now() method for consistency
-            static now() {
-                const now = new OriginalDate();
-                now.setFullYear(2017);
-                return now.getTime();
-            }
-        }
+  static now() {
+    const now = new OriginalDate();
+    now.setFullYear(2017);
+    return now. getTime();
+  }
+}
 
-        // Replace the global Date object with our modified version
-        window.Date = MockDate;
-    </script>
-    <!-- END SIMULATION SCRIPT -->
+window.Date = MockDate;
+</script>
+<!-- END SIMULATION SCRIPT -->
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <title>Santa's Village — Google Santa Tracker</title>
-    <meta property="og:title" itemprop="name" content="Santa's Village — Google Santa Tracker">
-    <meta property="og:type" content="website">
-    <meta property="og:image" itemprop="image" content="https://santatracker.google.com/images/og.png">
-    <meta property="og:image:width" content="1333">
-    <meta property="og:image:height" content="1000">
-    <meta property="og:description" itemprop="description" content="Follow Santa Claus around the world with Google Santa Tracker on Google Maps.">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@googlemaps">
-    <meta name="twitter:title" content="Santa's Village — Google Santa Tracker">
-    <meta name="twitter:description" content="Follow Santa Claus around the world with Google Santa Tracker on Google Maps.">
-    <meta name="twitter:image" content="https://santatracker.google.com/images/og.png">
-    <link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,800|Lobster" rel="stylesheet">
-    <link href="//maps.gstatic.com/mapfiles/santatracker/v201712120845/sass/santatracker.css" rel="stylesheet">
-    <meta name="theme-color" content="#00c6ed">
-    <!-- non-standard meta tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#00c6ed">
-    <meta name="msapplication-TileColor" content="#30B443">
-    <meta name="msapplication-tap-highlight" content="no">
-    <!-- icons -->
-    <link rel="apple-touch-icon" sizes="76x76" href="/images/icon-76.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/icon-120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/icon-152.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="/images/icon-167.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/icon-180.png">
-    <link rel="shortcut icon" sizes="16x16" id="favicon" href="/images/favicon-16.png">
-    <link rel="shortcut icon" sizes="32x32" id="favicon" href="/images/favicon-32.png">
-    <link rel="shortcut icon" sizes="64x64" id="favicon" href="/images/favicon-64.png">
-    <link rel="shortcut icon" sizes="96x96" id="favicon" href="/images/favicon-96.png">
-    <!-- Analytics -->
-    <script>
-        window.ga = window.ga || function() {
-            (ga.q = ga.q || []).push(arguments);
-        };
-        ga.l = +new Date;
-        ga("create", "UA-37048309-" + (location.hostname === "santatracker.google.com" ? "1" : "2"), "auto");
-        ga("set", "transport", "beacon");
-    </script>
-    <script src="https://www.google-analytics.com/analytics.js" async></script>
-    <!-- JS -->
-    <script>
-        window.customElements || document.write("<!--");
-    </script>
-    <script src="//maps.gstatic.com/mapfiles/santatracker/v201712120845/components/webcomponentsjs/custom-elements-es5-adapter.js"></script>
-    <!--!do not remove-->
-    <script>
-        !function() {
-            if (
-                !(
-                    window.location.search.indexOf("ignore_browser_check") !== -1 ||
-                    navigator.userAgent.indexOf("Googlebot") !== -1 ||
-                    (function() {
-                        if (!(window.performance && window.performance.now && window.WeakMap && window.history)) return false;
-                        var e = navigator.userAgent;
-                        if (e.indexOf("Chrome") === -1 && e.indexOf("Android") !== -1) {
-                            return /^Google/.test(navigator.vendor);
-                        }
-                        var n = /Chrome\/(\d+)/.exec(e);
-                        return !n || !n[1] || parseInt(n[1], 10) >= 44;
-                    })()
-                )
-            ) {
-                function redirect() {
-                    window.location = "upgrade.html" + (window.location.query || "");
-                }
-                window.ga("send", "pageview", "/");
-                window.ga("send", "event", "Polymer", "unsupported browser", { hitCallback: redirect });
-                window.setTimeout(redirect, 1000);
-            }
-            window.onerror = function(e, n, o, r, t) {
-                window.ga("send", "event", {
-                    eventCategory: "Script",
-                    eventAction: "unhandled error",
-                    eventLabel: t ? t.stack : e + "\n" + n + " " + o + ":" + r
-                });
-            };
-            var newUrl = (function() {
-                var match = window.location.pathname.match(/.*\/intl\/([^_/]+)(?:|_ALL)\//);
-                var lang = match && match[1];
-                var search = window.location.search || "";
-                var hlMatch = /(?:\?|&)hl=([^&]*)\b/;
-                if (!lang) {
-                    var e = hlMatch.exec(search);
-                    lang = e && e[1];
-                }
-                search = search.replace(hlMatch, "").replace(/^&/, "?");
-                window.requestLang = lang;
-                var pathMatch = window.location.pathname.match(/(\/(?:\w+\.html|))$/);
-                var path = pathMatch ? pathMatch[1] : "/";
-                var origin = window.location.origin;
-                if (lang) {
-                    origin += "/intl/" + lang + (window.location.hostname === "santatracker.google.com" ? "" : "_ALL");
-                }
-                return origin + path + search + window.location.hash;
-            })();
-            // FIX: Commented out to avoid SecurityError in sandboxed environments (blob URL).
-            // history.replaceState(null, document.title, newUrl);
-            var manifestLink = document.createElement("link");
-            manifestLink.rel = "manifest";
-            manifestLink.crossOrigin = "use-credentials";
-            manifestLink.href = "manifest.json";
-            document.head.appendChild(manifestLink);
-            if ("serviceWorker" in navigator) {
-                if (window.location.hostname === "santatracker.google.com") {
-                    window.sw = navigator.serviceWorker.register("/sw.js?lang=" + document.documentElement.lang);
-                } else {
-                    navigator.serviceWorker.register("/sw-dummy.js");
-                }
-                navigator.serviceWorker.addEventListener("controllerchange", function() {
-                    window.location.reload();
-                });
-            }
-            window.Polymer = {
-                noUrlSettings: true,
-                dom: "shadow",
-                lazyRegister: "max",
-                useNativeCSSProperties: true
-            };
-        }();
-    </script>
-    <link href="//maps.gstatic.com/mapfiles/santatracker/v201712120845/elements/elements_en.html" rel="import" crossorigin="">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Santa's Village — Google Santa Tracker</title>
+<meta property="og:title" itemprop="name" content="Santa's Village — Google Santa Tracker">
+<meta property="og:type" content="website">
+<meta property="og:image" itemprop="image" content="https://santatracker.google.com/images/og. png">
+<meta property="og:image:width" content="1333">
+<meta property="og:image:height" content="1000">
+<meta property="og:description" itemprop="description" content="Follow Santa Claus around the world with Google Santa Tracker on Google Maps. ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@googlemaps">
+<meta name="twitter:title" content="Santa's Village — Google Santa Tracker">
+<meta name="twitter:description" content="Follow Santa Claus around the world with Google Santa Tracker on Google Maps.">
+<meta name="twitter:image" content="https://santatracker.google.com/images/og.png">
+
+<!-- GOOGLE SANS FONT -->
+<link href="https://fonts.googleapis.com/css?family=Google+Sans:100,300,400,500,700,900,100i,300i,400i,500i,700i,900i" rel="stylesheet">
+<!-- MATERIAL ICONS -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,800|Lobster" rel="stylesheet">
+<link href="//maps.gstatic.com/mapfiles/santatracker/v201712120845/sass/santatracker.css" rel="stylesheet">
+<meta name="theme-color" content="#00c6ed">
+
+<!-- non-standard meta tags -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#00c6ed">
+<meta name="msapplication-TileColor" content="#30B443">
+<meta name="msapplication-tap-highlight" content="no">
+
+<!-- icons -->
+<link rel="apple-touch-icon" sizes="76x76" href="/images/icon-76.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/images/icon-120.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/images/icon-152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="/images/icon-167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon-180.png">
+<link rel="shortcut icon" sizes="16x16" id="favicon" href="/images/favicon-16.png">
+<link rel="shortcut icon" sizes="32x32" id="favicon" href="/images/favicon-32.png">
+<link rel="shortcut icon" sizes="64x64" id="favicon" href="/images/favicon-64.png">
+<link rel="shortcut icon" sizes="96x96" id="favicon" href="/images/favicon-96.png">
+
+<!-- Analytics -->
+<script>
+window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments); }; ga.l = +new Date; ga("create", "UA-37048309-" + (location.hostname === "santatracker.google.com" ? "1" : "2"), "auto"); ga("set", "transport", "beacon");
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async></script>
+
+<!-- JS -->
+<script>
+window.customElements || document.write("<!--");
+</script>
+<script src="//maps.gstatic.com/mapfiles/santatracker/v201712120845/components/webcomponentsjs/custom-elements-es5-adapter.js"></script>
+<!--!  do not remove-->
+<script>
+! function() {
+  if (!(window.location.search.indexOf("ignore_browser_check") !== -1 || navigator.userAgent.indexOf("Googlebot") !== -1 || (function() {
+    if (!(window.performance && window.performance.now && window.WeakMap && window.history)) return false;
+    var e = navigator.userAgent;
+    if (e.indexOf("Chrome") === -1 && e.indexOf("Android") !== -1) {
+      return /^Google/. test(navigator.vendor);
+    }
+    var n = /Chrome\/(\d+)/.exec(e);
+    return ! n || ! n[1] || parseInt(n[1], 10) >= 44;
+  }())) {
+    function redirect() {
+      window.location = "upgrade. html" + (window.location.query || "");
+    }
+    window.ga("send", "pageview", "/");
+    window. ga("send", "event", "Polymer", "unsupported browser", { hitCallback: redirect });
+    window.setTimeout(redirect, 1000);
+  }
+  window.onerror = function(e, n, o, r, t) {
+    window.ga("send", "event", {
+      eventCategory: "Script",
+      eventAction: "unhandled error",
+      eventLabel: t ?  t. stack : e + "\n" + n + " " + o + ":" + r
+    });
+  };
+  var newUrl = (function() {
+    var match = window.location.pathname.match(/.*\/intl\/([^_/]+)(? :|_ALL)\//);
+    var lang = match && match[1];
+    var search = window.location.search || "";
+    var hlMatch = /(? :\?|&)hl=([^&]*)\b/;
+    if (! lang) {
+      var e = hlMatch.exec(search);
+      lang = e && e[1];
+    }
+    search = search.replace(hlMatch, ""). replace(/^&/, "? ");
+    window.requestLang = lang;
+    var pathMatch = window.location.pathname. match(/(\/(?: \w+\. html|))$/);
+    var path = pathMatch ? pathMatch[1] : "/";
+    var origin = window.location.origin;
+    if (lang) {
+      origin += "/intl/" + lang + (window.location.hostname === "santatracker.google.com" ? "" : "_ALL");
+    }
+    return origin + path + search + window.location.hash;
+  })();
+  var manifestLink = document.createElement("link");
+  manifestLink.rel = "manifest";
+  manifestLink.crossOrigin = "use-credentials";
+  manifestLink. href = "manifest.json";
+  document.head.appendChild(manifestLink);
+  if ("serviceWorker" in navigator) {
+    if (window.location.hostname === "santatracker.google.com") {
+      window.sw = navigator.serviceWorker.register("/sw.js? lang=" + document.documentElement.lang);
+    } else {
+      navigator.serviceWorker.register("/sw-dummy.js");
+    }
+    navigator.serviceWorker.addEventListener("controllerchange", function() {
+      window.location.reload();
+    });
+  }
+  window. Polymer = {
+    noUrlSettings: true,
+    dom: "shadow",
+    lazyRegister: "max",
+    useNativeCSSProperties: true
+  };
+}();
+</script>
+<link href="//maps.gstatic.com/mapfiles/santatracker/v201712120845/elements/elements_en.html" rel="import" crossorigin="">
+
+<!-- WELCOME POPUP STYLES -->
+<style>
+:root {
+  --christmas-red: #d42426;
+  --christmas-green: #165b33;
+  --snow-white: #ffffff;
+  --gold: #ffd700;
+  --material-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.santa-page-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 9997;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.santa-page-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.santa-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.santa-popup-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.santa-welcome-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.85);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 9999;
+  width: 90%;
+  max-width: 550px;
+  max-height: 75vh;
+  background: linear-gradient(135deg, #0084d4, #00a8e8);
+  border-radius: 20px;
+  padding: 48px;
+  box-shadow: var(--material-shadow-lg);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: transform 0.5s cubic-bezier(0.34, 1. 56, 0.64, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.santa-welcome-popup.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.santa-welcome-popup::-webkit-scrollbar {
+  width: 8px;
+}
+
+.santa-welcome-popup::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.santa-welcome-popup::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.santa-welcome-popup::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.santa-popup-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: var(--snow-white);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 500;
+}
+
+.santa-popup-close-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(90deg);
+}
+
+.santa-popup-content {
+  font-family: 'Google Sans', sans-serif;
+  color: var(--snow-white);
+}
+
+.santa-popup-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.santa-popup-description {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 28px 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.3px;
+}
+
+.santa-popup-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-top: 24px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.santa-popup-features {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 24px 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.santa-popup-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.santa-popup-feature-item:last-child {
+  margin-bottom: 0;
+}
+
+. santa-popup-feature-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.santa-popup-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.santa-popup-btn {
+  padding: 16px 28px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Google Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0. 3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.santa-popup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.santa-popup-btn:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.santa-popup-btn-primary {
+  background: linear-gradient(135deg, var(--christmas-green), #1a7a42);
+  color: var(--snow-white);
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(22, 91, 51, 0.3);
+}
+
+.santa-popup-btn-primary:hover {
+  background: linear-gradient(135deg, #1a7a42, #0f4a28);
+  box-shadow: 0 10px 24px rgba(22, 91, 51, 0.4);
+}
+
+.santa-popup-btn-secondary {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--snow-white);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+.santa-popup-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+}
+
+.santa-popup-btn-sjt {
+  background: linear-gradient(135deg, var(--christmas-red), var(--christmas-green));
+  color: var(--snow-white);
+  border: 2px solid rgba(255, 255, 255, 0. 3);
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(212, 36, 38, 0.3);
+}
+
+.santa-popup-btn-sjt:hover {
+  background: linear-gradient(135deg, #ff2020, #0f4a28);
+  box-shadow: 0 10px 28px rgba(212, 36, 38, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .santa-welcome-popup {
+    width: 92%;
+    padding: 32px 20px;
+    border-radius: 16px;
+  }
+  . santa-popup-title {
+    font-size: 24px;
+  }
+  . santa-popup-description {
+    font-size: 14px;
+  }
+  .santa-popup-features {
+    padding: 16px;
+    margin: 20px 0;
+  }
+  .santa-popup-feature-item {
+    font-size: 13px;
+    gap: 10px;
+  }
+  . santa-popup-btn {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .santa-welcome-popup {
+    padding: 24px 16px;
+    border-radius: 12px;
+  }
+  .santa-popup-title {
+    font-size: 20px;
+  }
+  . santa-popup-description {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .santa-popup-close-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+  .santa-popup-buttons {
+    gap: 10px;
+    margin-top: 24px;
+  }
+}
+</style>
 </head>
 <body class="scrollock" data-static="//maps.gstatic.com/mapfiles/santatracker/v201712120845/" data-version="v201712120845" unresolved="">
-    <santa-app id="santaApp" routing=""></santa-app>
-    <santa-countdown aria-atomic="false" aria-live="assertive" aria-relevant="additions" hidden="" role="timer"></santa-countdown>
-    <santa-notice></santa-notice>
-    <div id="unresolved_placeholder"></div>
-    <script>
-        !function() {
-            function addTimingEvent(eventName, category) {
-                document.addEventListener(eventName, function() {
-                    var time = Math.round(window.performance.now());
-                    ga("send", "timing", category, eventName, time);
-                });
-            }
 
-            addTimingEvent("HTMLImportsLoaded", "Polymer");
-            addTimingEvent("WebComponentsReady", "Polymer");
+<!-- WELCOME POPUP HTML -->
+<div class="santa-page-backdrop" id="santaPageBackdrop"></div>
+<div class="santa-popup-overlay" id="santaPopupOverlay"></div>
+<div class="santa-welcome-popup" id="santaWelcomePopup">
+  <button class="santa-popup-close-btn" id="santaPopupCloseBtn" aria-label="Close welcome popup">✕</button>
+  <div class="santa-popup-content">
+    <h2 class="santa-popup-title">Welcome to the 2017 Santa Tracker Revival! </h2>
+    <p class="santa-popup-description">
+      Hey there, friend! Thanks for stopping by this festive community-made revival of the classic 2017 Google Santa Tracker!  This is <strong>not affiliated with Google</strong> — it's just a fun throwback built with nostalgia and holiday cheer by the same folks behind Santa's Journey Tracking.
+    </p>
+    <div class="santa-popup-section-title">What to Expect:</div>
+    <div class="santa-popup-features">
+      <div class="santa-popup-feature-item">
+        <span class="santa-popup-feature-icon">🎮</span>
+        <span><strong>All Classic Games Work! </strong> Code A Snowflake, city expeditions, and more — many removed from the modern tracker!</span>
+      </div>
+      <div class="santa-popup-feature-item">
+        <span class="santa-popup-feature-icon">📍</span>
+        <span><strong>Live Countdown</strong> — Visit on December 24th to see if Santa's original tracker wakes up for his journey!</span>
+      </div>
+      <div class="santa-popup-feature-item">
+        <span class="santa-popup-feature-icon">🐛</span>
+        <span><strong>Authentic 2017 Experience</strong> — Quirks, oddities, and all!  Some features might act unexpected because it's vintage code revived in 2025. </span>
+      </div>
+      <div class="santa-popup-feature-item">
+        <span class="santa-popup-feature-icon">💻</span>
+        <span><strong>Best on Desktop</strong> — Games run smoothly on larger screens. Mobile support is here, but desktop is where the magic happens!</span>
+      </div>
+      <div class="santa-popup-feature-item">
+        <span class="santa-popup-feature-icon">⚙️</span>
+        <span><strong>Live Updates</strong> — We're fixing bugs and improving things throughout December.  Check back for surprises!</span>
+      </div>
+    </div>
+    <div class="santa-popup-section-title">Important Stuff:</div>
+    <div class="santa-popup-features">
+      <div class="santa-popup-feature-item">
+        <span class="santa-popup-feature-icon">❓</span>
+        <span>We <strong>can't guarantee</strong> the countdown tracker will work on Christmas Eve — it might, or Santa might unplug it by accident.  Who knows!  🎅</span>
+      </div>
+      <div class="santa-popup-feature-item">
+        <span class="santa-popup-feature-icon">🎄</span>
+        <span>This is all for <strong>fun</strong> — a cozy Christmas throwback for fans of the original! </span>
+      </div>
+      <div class="santa-popup-feature-item">
+        <span class="santa-popup-feature-icon">🐛</span>
+        <span>Found a bug or glitch? It's probably normal!  Quirks are part of the charm. But we appreciate bug reports! </span>
+      </div>
+      <div class="santa-popup-feature-item">
+        <span class="santa-popup-feature-icon">🔗</span>
+        <span>If the countdown doesn't work on Dec 24th, use our live tracker or the modern official tracker (links below). </span>
+      </div>
+    </div>
+    <p class="santa-popup-description">
+      Ready to explore?  Dive into the festive fun, play the games, and get ready for Christmas magic! 🎄💖
+    </p>
+    <div class="santa-popup-buttons">
+      <button class="santa-popup-btn santa-popup-btn-primary" id="santaPopupEnterBtn">
+        <span class="material-icons" style="font-size: 20px;">arrow_forward</span>
+        Enter the Village
+      </button>
+      <a href="https://speechless-parrot.github.io/santas-journey-tracking" target="_blank" rel="noopener noreferrer" class="santa-popup-btn santa-popup-btn-sjt">
+        <span class="material-icons" style="font-size: 20px;">track_changes</span>
+        Visit Santa's Journey Tracking
+      </a>
+      <a href="https://santatracker.google.com" target="_blank" rel="noopener noreferrer" class="santa-popup-btn santa-popup-btn-secondary">
+        <span class="material-icons" style="font-size: 20px;">public</span>
+        Visit Modern Google Santa Tracker
+      </a>
+    </div>
+  </div>
+</div>
 
-            (function() {
-                var loadCount = 0, loaded = 0;
-                var onLoad = function() {
-                    if (++loaded < loadCount || window.HTMLImports) {
-                        return;
-                    }
-                    document.dispatchEvent(new CustomEvent("WebComponentsReady", { bubbles: true }));
-                };
-                var loadScript = (function() {
-                    var staticPath = document.body.getAttribute("data-static");
-                    return function(src, async) {
-                        loadCount++;
-                        var script = document.createElement("script");
-                        if (async) {
-                            script.async = false;
-                        }
-                        script.src = staticPath + src;
-                        script.onload = onLoad;
-                        document.head.appendChild(script);
-                    };
-                })();
+<santa-app id="santaApp" routing=""></santa-app>
+<santa-countdown aria-atomic="false" aria-live="assertive" aria-relevant="additions" hidden="" role="timer"></santa-countdown>
+<santa-notice></santa-notice>
+<div id="unresolved_placeholder"></div>
 
-                var urlSupported = false;
-                try {
-                    var url = new URL("b", "http://a");
-                    url.pathname = "c%20d";
-                    urlSupported = (url.href === "http://a/c%20d");
-                } catch(e) {}
+<!-- WELCOME POPUP LOGIC -->
+<script>
+const SANTA_POPUP_DEBUG_MODE = false;
 
-                if (!urlSupported) {
-                    loadScript("components/url/url.js");
-                }
+function initializeSantaWelcomePopup() {
+  const pageBackdrop = document.getElementById('santaPageBackdrop');
+  const overlay = document.getElementById('santaPopupOverlay');
+  const popup = document.getElementById('santaWelcomePopup');
+  const closeBtn = document.getElementById('santaPopupCloseBtn');
+  const enterBtn = document.getElementById('santaPopupEnterBtn');
 
-                if (!("registerElement" in document && "import" in document.createElement("link") && "content" in document.createElement("template"))) {
-                    loadScript("components/webcomponentsjs/webcomponents-lite.js", true);
-                }
+  const hasSeenPopup = localStorage.getItem('santa-tracker-popup-seen');
+  const shouldShowPopup = SANTA_POPUP_DEBUG_MODE || ! hasSeenPopup;
 
-                if (loadCount === 0) {
-                    onLoad();
-                }
-            })();
+  if (shouldShowPopup) {
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      pageBackdrop.classList.add('active');
+      overlay.classList.add('active');
+      popup.classList.add('active');
+    }, 300);
+  }
 
-            if (window.santaApp.mode === "portal") {
-                document.body.addEventListener("click", function(e) {
-                    var link = e.composedPath().filter(function(el) {
-                        return el.localName === "a" && el.href;
-                    })[0];
-                    if (link && link.href.indexOf(window.location.origin + "/") !== 0) {
-                        e.stopPropagation();
-                        e.preventDefault();
-                    }
-                });
+  function closePopup() {
+    pageBackdrop.classList.remove('active');
+    overlay.classList.remove('active');
+    popup.classList.remove('active');
+    document.body.style.overflow = 'auto';
 
-                var staticPath = document.body.getAttribute("data-static");
-                ["eventemitter2/eventemitter2.min.js", "roslibjs/roslib.min.js", "spacenav/spacenav.js"].forEach(function(src) {
-                    var script = document.createElement("script");
-                    script.src = staticPath + "third_party/lib/" + src;
-                    document.body.appendChild(script);
-                });
-            }
+    if (! SANTA_POPUP_DEBUG_MODE) {
+      localStorage.setItem('santa-tracker-popup-seen', 'true');
+    }
+  }
 
-            window.setTimeout(function() {
-                var style1 = "font-size: 16px; line-height: 24px; background: #555; color: white; padding: 4px; border-radius: 4px;";
-                var style2 = function(color) {
-                    return "font-size: 16px; line-height: 24px; color: " + color + ";";
-                };
-                console.log(
-                    "%cHello! Interested in how the helper elves built Santa Tracker? 🎅🤖🎄 %cCheck out our 🎥✨ Chrome Developers channel:",
-                    style2("blue"),
-                    style2("red")
-                );
-                console.log("%chttps://youtube.com/playlist?list=PLNYkxOF6rcIAQ-xb-Y04twWvKJU6N2UVm", style1);
-                console.log("%cOr find the source code on GitHub:", style2("green"));
-                console.log("%chttps://github.com/google/santa-tracker-web", style1);
-            }, 1000);
-        }();
-    </script>
-    <!-- FIX: Moved this script to the end of the body to ensure Polymer is defined before being used. -->
-    <script>
-        Polymer.setPassiveTouchGestures && Polymer.setPassiveTouchGestures(true);
-    </script>
+  closeBtn.addEventListener('click', closePopup);
+  enterBtn.addEventListener('click', closePopup);
+  pageBackdrop.addEventListener('click', closePopup);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && popup.classList.contains('active')) {
+      closePopup();
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document. addEventListener('DOMContentLoaded', initializeSantaWelcomePopup);
+} else {
+  initializeSantaWelcomePopup();
+}
+</script>
+
+<script>
+! function() {
+  function addTimingEvent(eventName, category) {
+    document.addEventListener(eventName, function() {
+      var time = Math.round(window.performance.now());
+      ga("send", "timing", category, eventName, time);
+    });
+  }
+  addTimingEvent("HTMLImportsLoaded", "Polymer");
+  addTimingEvent("WebComponentsReady", "Polymer");
+  (function() {
+    var loadCount = 0, loaded = 0;
+    var onLoad = function() {
+      if (++loaded < loadCount || window.HTMLImports) {
+        return;
+      }
+      document.dispatchEvent(new CustomEvent("WebComponentsReady", { bubbles: true }));
+    };
+    var loadScript = (function() {
+      var staticPath = document.body.getAttribute("data-static");
+      return function(src, async) {
+        loadCount++;
+        var script = document.createElement("script");
+        if (async) {
+          script. async = false;
+        }
+        script. src = staticPath + src;
+        script.onload = onLoad;
+        document.head.appendChild(script);
+      };
+    })();
+    var urlSupported = false;
+    try {
+      var url = new URL("b", "http://a");
+      url.pathname = "c%20d";
+      urlSupported = (url.href === "http://a/c%20d");
+    } catch(e) {}
+    if (! urlSupported) {
+      loadScript("components/url/url.js");
+    }
+    if (!("registerElement" in document && "import" in document. createElement("link") && "content" in document.createElement("template"))) {
+      loadScript("components/webcomponentsjs/webcomponents-lite.js", true);
+    }
+    if (loadCount === 0) {
+      onLoad();
+    }
+  })();
+  if (window.santaApp. mode === "portal") {
+    document.body.addEventListener("click", function(e) {
+      var link = e.composedPath(). filter(function(el) {
+        return el.localName === "a" && el. href;
+      })[0];
+      if (link && link.href. indexOf(window.location.origin + "/") !== 0) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    });
+    var staticPath = document.body.getAttribute("data-static");
+    ["eventemitter2/eventemitter2. min.js", "roslibjs/roslib.min.js", "spacenav/spacenav.js"]. forEach(function(src) {
+      var script = document.createElement("script");
+      script.src = staticPath + "third_party/lib/" + src;
+      document. body.appendChild(script);
+    });
+  }
+  window.setTimeout(function() {
+    var style1 = "font-size: 16px; line-height: 24px; background: #555; color: white; padding: 4px; border-radius: 4px;";
+    var style2 = function(color) { return "font-size: 16px; line-height: 24px; color: " + color + ";"; };
+    console.log(
+      "%cHello!  Interested in how the helper elves built Santa Tracker? 🎅🤖🎄 %cCheck out our 🎥✨ Chrome Developers channel:",
+      style2("blue"),
+      style2("red")
+    );
+    console.log("%chttps://youtube.com/playlist?list=PLNYkxOF6rcIAQ-xb-Y04twWvKJU6N2UVm", style1);
+    console.log("%cOr find the source code on GitHub:", style2("green"));
+    console.log("%chttps://github.com/google/santa-tracker-web", style1);
+  }, 1000);
+}();
+</script>
+
+<script>
+Polymer. setPassiveTouchGestures && Polymer.setPassiveTouchGestures(true);
+</script>
 </body>
 </html>
