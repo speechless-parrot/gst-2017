@@ -362,11 +362,13 @@ window.customElements || document.write("<!--");
 }
 
 .santa-popup-btn-primary {
-  background: linear-gradient(135deg, var(--christmas-green), #1a7a42);
+  background: linear-gradient(135deg, var(--christmas-green), color-mix(in srgb, var(--christmas-green) 60%, white));
   color: var(--snow-white);
   font-weight: 700;
   box-shadow: 0 6px 16px rgba(22, 91, 51, 0.3);
 }
+
+
 
 .santa-popup-btn-primary:hover {
   background: linear-gradient(135deg, #1a7a42, #0f4a28);
@@ -489,7 +491,7 @@ window.customElements || document.write("<!--");
     <div class="santa-popup-features">
       <div class="santa-popup-feature-item">
         <span class="santa-popup-feature-icon">❓</span>
-        <span>We <strong>can't guarantee</strong> the countdown tracker will work on Christmas Eve — it might, or Santa might unplug it by accident.  Who knows!  🎅</span>
+        <span>Even though the countdown is active, we <strong>can't guarantee</strong> the tracker itself will work on Christmas Eve — it might, or Santa might unplug it by accident.  Who knows!  🎅</span>
       </div>
       <div class="santa-popup-feature-item">
         <span class="santa-popup-feature-icon">🎄</span>
@@ -501,7 +503,7 @@ window.customElements || document.write("<!--");
       </div>
       <div class="santa-popup-feature-item">
         <span class="santa-popup-feature-icon">🔗</span>
-        <span>If the countdown doesn't work on Dec 24th, use our live tracker or the modern official tracker (links below). </span>
+        <span>If the tracker doesn't work on Dec 24th, check out our live tracker or the modern official tracker (links below). </span>
       </div>
     </div>
     <p class="santa-popup-description">
